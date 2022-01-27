@@ -1,0 +1,26 @@
+.root {
+    width: 100%;
+    height: 100%;
+    display: flex;
+}
+
+.sidebar {
+    width: 4rem;
+    height: 100%;
+    flex: 0 0 auto;
+    background-color: theme(bg, accent);
+    color: theme-contrast(bg, accent);
+    padding: spaces(sm);
+    @include flex-col;
+    align-items: center;
+    button.theme {
+        @include icon-btn;
+        color: theme-contrast(bg, accent);
+    }
+}
+
+.main {
+    flex: 1;
+    @include typography;
+    overflow: auto;
+}

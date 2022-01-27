@@ -1,0 +1,31 @@
+$typography-classes: (
+  body: (1,2),
+  heading: (1,2,3,4),
+  small: (1,2),
+  placeholder: (),
+);
+
+@each $key,$variants in $typography-classes {
+  @if (length($variants) == 0){
+    .variant-#{$key} {
+      @include typography($key);
+    }
+  }
+  @each $variant in $variants {
+    .variant-#{$key}-#{$variant} {
+      @include typography($key, $variant);
+    }
+  }
+}
+
+$colors: primary, secondary, error, link, placeholder;
+
+@each $color in $colors {
+    .color-#{$color} {
+        color: theme(text, $color);
+    }
+}
+
+.inherit {
+  color: inherit;
+}

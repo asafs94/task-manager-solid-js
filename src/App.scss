@@ -1,0 +1,67 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+
+// ################ BASE ###########
+
+* {
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+  list-style: none;
+  background-color: transparent;
+  border: none;
+  font-size: 1rem;
+  font: inherit;
+}
+
+.icon {
+  color: inherit;
+  fill: currentColor;
+}
+
+html, body, #root {
+  width: 100%;
+  height: 100%;
+  font-family: $app-font-family;
+  overflow: auto;
+}
+
+#root {
+  color: theme(text);
+  background-color: theme(bg);
+}
+
+input {
+  &::placeholder {
+    @include typography(placeholder);
+  }
+}
+
+button {
+  cursor: pointer;
+  color: inherit;
+}
+
+body {
+  * {
+    transition: background-color ease-in-out 250ms;
+  }
+  // ################ THEME ###########
+  @include define-theme($light-theme);
+  @include dark-theme {
+    @include define-theme($dark-theme);
+  }
+}
+
+// ######### Foreground ##########
+$colors: primary, secondary, error, link, placeholder;
+@each $color in $colors {
+  .foreground-#{$color} {
+    color: theme(text, $color);
+  }
+}
+
+// ########## UTILITIES ##################
+
+.truncate {
+  @include truncate;
+}

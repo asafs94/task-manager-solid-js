@@ -1,0 +1,54 @@
+.flex-row {
+    @include flex-row;
+}
+
+.flex-col {
+    @include flex-col;
+}
+
+$flex-align: space-between, space-around, space-evenly, flex-start, flex-end, center;
+@each $value in $flex-align {
+    .items-#{$value} {
+        align-items: $value;
+    }
+    .justify-#{$value} {
+        justify-content: $value;
+    }
+}
+
+// ########### SPACING CLASSES #################
+
+$spacing-props-with-direction: (
+    m: margin,
+    p: padding,
+);
+
+$spacing-directions: (
+    x: "inline",
+    y: "block",
+    t: "block-start",
+    b: "block-end",
+    l: "inline-start",
+    r: "inline-end",
+);
+
+@each $key, $value in $spaces {
+    .gap-#{$key} {
+        gap: $value;
+    }
+}
+
+@each $spacing-prop, $s-name in $spacing-props-with-direction {
+    @each $key, $value in $spaces {
+        .#{$spacing-prop}-#{$key} {
+            #{$s-name}: $value;
+        }
+    }
+    @each $spacing-direction, $d-name in $spacing-directions {
+        @each $key, $value in $spaces {
+            .#{$spacing-prop}#{$spacing-direction}-#{$key} {
+                #{$s-name}-#{$d-name}: $value;
+            }
+        }
+    }
+}

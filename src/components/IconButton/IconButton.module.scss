@@ -1,0 +1,7 @@
+$variants: contained, simple, highlight;
+
+@each $variant in $variants {
+    .#{$variant} {
+        @include icon-btn($variant);
+    }
+}

@@ -1,0 +1,85 @@
+@use 'sass:color';
+@use './palette' as *;
+@use './utils' as utils;
+
+$light-theme: (
+    text: (
+        DEFAULT: palette(gray, 900),
+        primary: palette(gray, 900),
+        secondary: palette(gray, 500),
+        link: palette(sky, 500),
+        placeholder: palette(gray, 400),
+        error: palette(red, 900),
+    ),
+    bg: (
+        DEFAULT: #ffffff,
+        primary: #ffffff,
+        hovered: palette(indigo, 50),
+        selected: palette(indigo, 100),
+        accent: palette(gray, 600),
+    ),
+    border: (
+        DEFAULT: palette(gray, 400),
+    ),
+    primary: (
+        DEFAULT: palette(indigo, 500),
+    ),
+);
+
+$dark-theme: (
+    text: (
+        DEFAULT: #ffffff,
+        primary: #ffffff,
+        secondary: palette(gray, 400),
+        link: palette(sky, 500),
+        placeholder: palette(gray, 500),
+        error: palette(red, 900),
+    ),
+    bg: (
+        DEFAULT: palette(gray, 900),
+        primary: palette(gray, 900),
+        hovered: palette(gray, 800),
+        selected: palette(gray,700),
+        accent: palette(gray, 600),
+    ),
+    border: (
+        DEFAULT: palette(gray, 400),
+    ),
+    primary: (
+        DEFAULT: palette(indigo, 500),
+    ),
+);
+
+@function get-contrast-color($color){
+    @if(color.lightness($color) >= 50%){
+        @return palette(gray, 900);
+    }
+    @return #ffffff;
+}
+
+@mixin define-theme($theme-map) {
+    @each $section, $section-map in $theme-map {
+        @each $key, $color in $section-map {
+            $color-rgb-value: color.red($color) color.green($color) color.blue($color);
+            --theme-#{$section}-#{$key}: #{$color-rgb-value};
+            --theme-#{$section}-#{$key}-contrast: #{get-contrast-color($color)};
+        }
+    }
+}
+
+@function theme($section, $key: DEFAULT, $alpha: 1) {
+    @return rgba( var( --theme-#{$section}-#{$key} ) / $alpha );
+}
+
+@function theme-contrast($section, $key: DEFAULT) {
+    @return var(--theme-#{$section}-#{$key}-contrast);
+}
+
+@mixin dark-theme {
+    .theme-dark & {
+        @content;
+    }
+    :global(.theme-dark) & {
+        @content
+    }
+}

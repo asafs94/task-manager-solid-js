@@ -1,0 +1,48 @@
+$app-font-family: "Poppins", sans-serif;
+
+@mixin typography($type: body, $variant: 1) {
+    @if ($type == heading) {
+        @if ($variant == 1) {
+        }
+        @if ($variant == 2) {
+            font-size: 1.5rem;
+            line-height: 1.5;
+            font-weight: 600;
+        }
+        @if ($variant == 3) {
+            font-weight: 600;
+            font-size: 1.125rem;
+            line-height: 1.6875rem;
+        }
+        @if ($variant == 4) {
+            font-size: 1rem;
+            line-height: 1.5;
+            font-weight: 600;
+            text-transform: uppercase;
+        }
+    }
+    @if ($type == body) {
+        font-size: 1rem;
+        line-height: 1.5;
+        @if ($variant == 1) {
+            font-weight: 400;
+        }
+        @if ($variant == 2) {
+            font-weight: 600;
+        }
+    }
+    @if ($type == small) {
+        font-size: 0.75rem;
+        line-height: 1.5;
+        @if ($variant == 1) {
+            font-weight: 400;
+        }
+        @if ($variant == 2) {
+            font-weight: 600;
+        }
+    }
+    @if ($type == placeholder) {
+        @include typography(body, 1);
+        font-style: italic;
+    }
+}

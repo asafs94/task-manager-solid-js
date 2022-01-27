@@ -1,0 +1,60 @@
+@use './utils' as *;
+@use './shape' as *;
+@use './spacing' as *;
+@use './palette' as *;
+@use './theme' as *;
+
+@mixin paper {
+    border: 1px solid theme(border);
+    background-color: theme(bg);
+}
+
+@mixin btn-palette($type) {
+    @if ($type == contained) {
+        background-color: palette(gray, 200);
+        &:hover {
+            background-color: palette(gray, 300);
+        }
+        &:active {
+            background-color: palette(gray, 400);
+        }
+        @include dark-theme {
+            background-color: palette(gray, 700);
+            &:hover {
+                background-color: palette(gray, 600);
+            }
+            &:active {
+                background-color: palette(gray, 500);
+            }
+        }
+    } @else if($type == simple) {
+        &:hover {
+            background-color: theme(text, $alpha: 0.1);
+        }
+        &:active {
+            background-color: theme(text, $alpha: 0.2);
+        }
+    } @else if($type == highlight) {
+        color: theme(text, secondary);
+        &:hover {
+            color: theme(text);
+        }
+    }
+}
+
+@mixin btn($type: simple) {
+    @include rounded;
+    @include btn-palette($type);
+    padding: spaces(2xs) spaces(xs);
+    color: theme(text);
+    height: fit-content;
+
+}
+
+@mixin icon-btn($type: simple) {
+    width: 1.5em;
+    height: 1.5em;
+    @include center-content;
+    @include rounded;
+    @include btn-palette($type);
+}

@@ -1,0 +1,13 @@
+$spaces: (
+    2xs: 0.25rem,
+    xs: 0.5rem,
+    sm: 0.75rem,
+    md: 1rem,
+    lg: 1.25rem,
+    xl: 1.5rem,
+    2xl: 1.75rem,
+);
+
+@function spaces($key) {
+    @return map-get($spaces, $key);
+}

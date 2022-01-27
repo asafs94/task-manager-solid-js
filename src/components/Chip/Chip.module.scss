@@ -1,0 +1,26 @@
+.chip {
+    box-shadow: 0 0 0 1px inset var(--chip-border);
+    @include typography(small);
+    @include rounded;
+    height: fit-content;
+    padding: 0 spaces(xs);
+    text-transform: uppercase;
+    @each $color-name, $shades-map in $palette {
+        $text-color: map-get($shades-map, 900);
+        $border-color: map-get($shades-map, 600);
+        $bg-color: map-get($shades-map, 300);
+        &-#{""+$color-name} {
+            --chip-border: #{$border-color};
+            color: $text-color;
+            background-color: $bg-color;
+            &.secondary {
+                box-shadow: none;
+                $text-color: map-get($shades-map, 500);
+                $bg-color: map-get($shades-map, 300);
+                color: $text-color;
+                background-color: $bg-color;
+                text-transform: none;
+            }
+        }
+    }
+}

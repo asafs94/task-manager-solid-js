@@ -1,0 +1,22 @@
+.root {
+    display: flex;
+    gap: spaces(xs);
+    padding: spaces(2xs) spaces(xs);
+    align-items: center;
+    border: 1px solid theme(border);
+    @include rounded;
+}
+
+.input {
+    &::placeholder {
+        color: theme(text, placeholder);
+    }
+}
+
+.btn {
+    @include center-content;
+    color: theme(text, secondary);
+    &:hover {
+        color: theme(text, primary);
+    }
+}

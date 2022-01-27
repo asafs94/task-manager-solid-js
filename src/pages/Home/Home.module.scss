@@ -1,0 +1,87 @@
+.root {
+  @include full-size;
+  display: flex;
+  flex-direction: column;
+  padding: spaces(xl);
+  gap: spaces(xl);
+}
+
+.main {
+  overflow: auto;
+}
+
+.tasklists-section {
+  flex: 6;
+  overflow: auto;
+}
+
+.task {
+  @include paper;
+  cursor: pointer;
+  user-select: none;
+  &:hover:not(:global(.selected)) {
+    background-color: theme(bg,hovered);
+  }
+
+  &:global(.selected){
+    background-color: theme(bg, selected);
+  }
+}
+
+.selected-task {
+  flex: 4;
+  @include flex-col;
+  gap: spaces(xl);
+
+  header {
+    @include flex-row;
+    justify-content: space-between;
+    .title {
+      @include typography(heading, 3);
+    }
+    .buttons {
+      button.complete {
+        @include btn;
+        @include typography(small);
+      }
+    }
+  }
+
+  // .checklist-section {
+  //   .check-item{
+  //     @include flex-row;
+  //     align-items: center;
+  //     gap: spaces(2xs);
+  //     input:checked + span {
+  //       color: theme(text, secondary);
+  //     }
+  //   }
+  // }
+
+  .subtasks-section {
+    @include flex-col;
+    gap: spaces(xs);
+    .subtask {
+      @include paper;
+      @include flex-col;
+      padding: spaces(sm);
+      gap: spaces(sm);
+      .row {
+        @include flex-row;
+        gap: spaces(sm);
+        justify-content: space-between;
+        align-items: center;
+      }
+      .title {
+        @include truncate;
+
+      }
+      .description {
+        @include truncate;
+        color: theme(text, secondary);
+      }
+      
+    }
+  }
+
+}

@@ -1,0 +1,9 @@
+.root {
+    padding: 0;
+    outline: none;
+    background-color: transparent;
+    color: inherit;
+    &:matches(:focus-visible, :focus) {
+        outline: none;
+    }
+}
